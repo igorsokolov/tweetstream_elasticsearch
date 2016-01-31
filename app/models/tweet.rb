@@ -25,21 +25,9 @@ class Tweet
   attribute :user,        User,                     mapping: { type: 'object' }
 
   def self.search(search_string, lon, lat, radius)
-    query_part =  if search_string.empty?
-                    { match_all: {} }
-                  else
-                    { 
-                      simple_query_string: {
-                        query: search_string
-                      }
-                    }
-                  end
     query = { 
       query: { 
-        bool: { 
-          must: [ 
-            query_part
-          ], 
+        filtered: { 
           filter: { 
             geo_distance: {
               distance: "#{radius.to_i}mi",
@@ -48,16 +36,21 @@ class Tweet
           }
         }
       }, 
-      sort: {
+      sort: [
         created_at: {
           order: "desc" 
         }
-      }, 
+      ], 
       size: 250
     }
+
+    unless search_string.empty?
+      query[:query][:filtered][:query] = { simple_query_string: { query: search_string } }
+    end
+
     begin
       self.index_name = SEARCH_ALIAS
-      p query
+      Rails.logger.info "Query: #{query}"
       super(query)
     rescue Elasticsearch::Transport::Transport::Errors::NotFound => e
       Rails.logger.fatal("Search error: #{e.message}")
