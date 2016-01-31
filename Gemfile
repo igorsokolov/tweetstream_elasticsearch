@@ -34,6 +34,8 @@ gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'elasticsearch-persistence', git: 'git://github.com/elasticsearch/elasticsearch-rails.git', require: 'elasticsearch/persistence/model'
 gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 
+gem 'tweetstream'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
