@@ -57,27 +57,3 @@ class Tweet
     end
   end
 end
-
-{ 
-  query: { 
-    bool: { 
-      must: [ 
-        { 
-          match_all:{} 
-        } 
-      ], 
-      filter: { 
-        geo_distance: {
-          distance:'100mi',
-          location: { lon: 122.68, lat: 37.75 }
-        }
-      }
-    }
-  }, 
-  sort: {
-    created_at: {
-      order: "desc" 
-    }
-  }, 
-  size: 250
-}
