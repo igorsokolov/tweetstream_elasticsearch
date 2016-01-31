@@ -14,6 +14,11 @@ namespace :twitter do
       tweet[:created_at] = status.created_at
       tweet[:text] = status.text
       tweet[:tweet_id] = status.id.to_s
+      tweet[:user] = {
+        screen_name: status.user.screen_name,
+        name: status.user.name,
+        profile_image_url: status.user.profile_image_url
+      }
 
       # Index managment. 
       # We need to create Index by hour and add it to our Search Alias
@@ -34,7 +39,7 @@ namespace :twitter do
       # Set index as working index for this hour
       Tweet.index_name = index_name unless Tweet.index_name == index_name
       
-      # puts "#{index_name} - #{tweet}" 
+      # puts "#{tweet[:user][:screen_name]} - #{tweet}" 
 
       # Create tweet
       Tweet.create(tweet)
