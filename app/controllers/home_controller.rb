@@ -8,6 +8,20 @@ class HomeController < ApplicationController
 
     @tweets = Tweet.search(params).to_a
 
+    if @tweets.empty?
+      empty_tweet = {
+        text: "No tweets found",
+        location:[params[:longitude], params[:latitude]],
+        created_at: Time.now,
+        user: {
+          screen_name: "",
+          name: "No results"
+        }
+
+      }
+      @tweets = [Tweet.new(empty_tweet)] 
+    end
+
     @hash = Gmaps4rails.build_markers(@tweets) do |tweet, marker|
       marker.lat tweet.location[1]
       marker.lng tweet.location[0]
