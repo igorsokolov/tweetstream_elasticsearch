@@ -62,4 +62,32 @@ class Tweet
       Rails.logger.fatal("Search error: #{e.message}")
     end
   end
+
+  def self.set_index_from_time(time)
+    return nil unless time.kind_of?(Time)
+    
+    # We need to create Index by hour and add it to our Search Alias
+    new_index_name = "#{Tweet::SEARCH_ALIAS}_#{time.strftime('%Y%m%d%H')}"
+
+    unless self.index_name == new_index_name
+      # If this hour index doesn't exists
+      unless self.gateway.index_exists? index: new_index_name
+
+        client = self.gateway.client
+        
+        # Create index
+        self.gateway.create_index! index: new_index_name, force: true
+        
+        # Assign this index search alias
+        client.indices.put_alias(index: new_index_name, name: SEARCH_ALIAS)
+        
+        # Delete index from more than 24 hours ago
+        old_index_name = "#{SEARCH_ALIAS}_#{(time-24.hours).strftime('%Y%m%d%H')}"
+        client.indices.delete index: old_index_name rescue nil
+      end
+
+      # Set index as working index 
+      self.index_name = new_index_name 
+    end
+  end
 end
