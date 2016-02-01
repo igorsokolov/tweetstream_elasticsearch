@@ -76,7 +76,7 @@ class Tweet
         client = self.gateway.client
         
         # Create index
-        self.gateway.create_index! index: new_index_name, force: true
+        self.gateway.create_index! index: new_index_name
         
         # Assign this index search alias
         client.indices.put_alias(index: new_index_name, name: SEARCH_ALIAS)

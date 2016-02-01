@@ -6,9 +6,9 @@ class HomeController < ApplicationController
     params[:radius]     = params[:radius].to_i    == 0   ? 20        : params[:radius].to_f
     params[:search]     ||= ''
 
-    @tweets = Tweet.search(params).to_a
+    @tweets = Tweet.search(params).try(:to_a)
 
-    if @tweets.empty?
+    if @tweets.blank?
       empty_tweet = {
         text: "No tweets found",
         location:[params[:longitude], params[:latitude]],
