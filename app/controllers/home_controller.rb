@@ -1,9 +1,9 @@
 class HomeController < ApplicationController
 
   def index
-    params[:longitude]  = params[:longitude].to_f == 0.0 ? -122.68 : params[:longitude].to_f
-    params[:latitude]   = params[:latitude].to_f  == 0.0 ? 37.75   : params[:latitude].to_f
-    params[:radius]     = params[:radius].to_i    == 0   ? 20      : params[:radius].to_f
+    params[:longitude]  = params[:longitude].to_f == 0.0 ? -122.4167 : params[:longitude].to_f
+    params[:latitude]   = params[:latitude].to_f  == 0.0 ? 37.7833   : params[:latitude].to_f
+    params[:radius]     = params[:radius].to_i    == 0   ? 20        : params[:radius].to_f
     params[:search]     ||= ''
 
     @tweets = Tweet.search(params).to_a

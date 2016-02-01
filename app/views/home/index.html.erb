@@ -4,8 +4,8 @@
     <div class="panel-body">
     <%= bootstrap_form_tag url: root_path, method: 'get', as: 'filter_form', :layout => :inline  do |f| %>
       <%= f.search_field :search, placeholder: 'Searh ', hide_label: true, value: params[:search] %>
-      <%= f.search_field :longitude, placeholder: 'Longitude ... ( -122.68 )', hide_label: true, value: params[:longitude] %>
-      <%= f.search_field :latitude, placeholder: 'Latitude ... ( 37.75 )', hide_label: true, value: params[:latitude]  %>
+      <%= f.search_field :longitude, placeholder: 'Longitude ... ( -122.4167 )', hide_label: true, value: params[:longitude] %>
+      <%= f.search_field :latitude, placeholder: 'Latitude ... ( 37.7833 )', hide_label: true, value: params[:latitude]  %>
       <%= f.select :radius, { 'Radius' => 0, '20 miles' => 20, '50 miles' => 50, '100 miles' => 100, '200 miles' => 200, '500 miles' => 500, '1000 miles' => 1000 }, hide_label: true, selected: params[:radius].to_i %>
       <%= f.submit 'Search' %>
     <% end %>
