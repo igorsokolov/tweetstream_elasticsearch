@@ -80,6 +80,7 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap_form (2.3.0)
     buftok (0.2.0)
     builder (3.2.2)
     byebug (8.2.1)
@@ -129,6 +130,7 @@ GEM
       thor (~> 0.19.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
     hashie (3.4.3)
     http (0.6.4)
       http_parser.rb (~> 0.6.0)
@@ -272,6 +274,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass
+  bootstrap_form
   byebug
   capybara
   coffee-rails (~> 4.1.0)
@@ -280,6 +283,7 @@ DEPENDENCIES
   elasticsearch-persistence!
   elasticsearch-rails!
   foreman
+  gmaps4rails
   jbuilder (~> 2.0)
   jquery-rails
   puma
