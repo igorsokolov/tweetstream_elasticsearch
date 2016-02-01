@@ -1,4 +1,6 @@
 <div class="well well-sm text-left">
-  <p>@<%= tweet.user.screen_name %> (<%= tweet.user.name %>) - <span class="small"><%= tweet.created_at %> UTC</span></p>
+  <% url = tweet.user.profile_image_url %>
+  <% image_url = "#{url['scheme']}://#{url['host']}#{url['path']}" %>
+  <%= image_tag image_url, size: "20x20", alt: tweet.user.screen_name, class: "img-circle img-responsive", style: "float:left;"%><div> @<%= tweet.user.screen_name %> (<%= tweet.user.name %>) - <span class="small"><%= tweet.created_at.to_s %> UTC</span></div>
   <p class="lead"><%= tweet.text %></p>
 </div>
